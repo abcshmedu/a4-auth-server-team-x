@@ -1,60 +1,66 @@
 package edu.hm.cs.swa.projekt_4.datamodel;
 
+import java.util.Date;
 import java.util.List;
 
 public class User {
 
-	
-	private String username;
-	private String password;
-	
-	private Token activeToken;
-	
-	private List<AuthorizationGroup> authGroup;
-	
-	
-	public User(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
+
+    private String username;
+    private String password;
+
+    private Token lastToken;
+
+    private List<AuthorizationGroup> authGroup;
 
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public User() {
+    }
 
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-
-	public Token getActiveToken() {
-		return activeToken;
-	}
+    public String getUsername() {
+        return username;
+    }
 
 
-
-	public void setActiveToken(Token activeToken) {
-		this.activeToken = activeToken;
-	}
-
+    public String getPassword() {
+        return password;
+    }
 
 
-	public List<AuthorizationGroup> getAuthGroup() {
-		return authGroup;
-	}
+    public Token getLastToken() {
+        return lastToken;
+    }
 
+    public Token getActiveToken(Date checkDate) {
+        if (getLastToken() != null && getLastToken().isValid(checkDate))
+            return getLastToken();
+        return null;
+    }
 
+    public void setLastToken(Token lastToken) {
+        this.lastToken = lastToken;
+    }
 
-	public void setAuthGroup(List<AuthorizationGroup> authGroup) {
-		this.authGroup = authGroup;
-	}
-	
-	
-	
+    public List<AuthorizationGroup> getAuthGroup() {
+        return authGroup;
+    }
+
+    public void setAuthGroup(List<AuthorizationGroup> authGroup) {
+        this.authGroup = authGroup;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", lastToken=" + lastToken +
+                ", authGroup=" + authGroup +
+                '}';
+    }
 }
