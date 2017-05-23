@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 /**
- * this is an implementation of the {@linkplain AuthService} interface.
+ * this is an implementation of the {@linkplain IAuthService} interface.
  */
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl implements IAuthService {
 
     private Logger LOGGER = Logger.getLogger(AuthServiceImpl.class.getName());
 

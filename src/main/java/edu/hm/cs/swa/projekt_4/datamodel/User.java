@@ -1,5 +1,6 @@
 package edu.hm.cs.swa.projekt_4.datamodel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class User {
 
     private Token lastToken;
 
-    private List<AuthorizationGroup> authGroup;
+    private List<AuthorizationGroup> authGroupList = new ArrayList<>();
 
 
     public User(String username, String password) {
@@ -47,11 +48,15 @@ public class User {
     }
 
     public List<AuthorizationGroup> getAuthGroup() {
-        return authGroup;
+        return authGroupList;
     }
 
     public void setAuthGroup(List<AuthorizationGroup> authGroup) {
-        this.authGroup = authGroup;
+        this.authGroupList = authGroup;
+    }
+    
+    public void addAuthGroup(AuthorizationGroup authGroup){
+    	this.authGroupList.add(authGroup);
     }
 
     @Override
@@ -60,7 +65,18 @@ public class User {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", lastToken=" + lastToken +
-                ", authGroup=" + authGroup +
+                ", authGroup=" + authGroupList +
                 '}';
+    }
+    
+    public boolean hasAuthorization(String id){
+    	
+    	for(AuthorizationGroup group : this.authGroupList){
+    		if(group.containsAuthorization(id)){
+    			return true;
+    		}
+    	}
+    	
+    	return false;
     }
 }

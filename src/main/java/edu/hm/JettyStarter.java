@@ -3,6 +3,9 @@ package edu.hm;
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.webapp.*;
 
+import edu.hm.cs.swa.projekt_4.persistence.DataStore;
+import edu.hm.cs.swa.projekt_4.persistence.DefaultDataFactory;
+
 /**
  * Start the application without an AppServer like tomcat.
  * @author <a mailto:axel.boettcher@hm.edu>Axel B&ouml;ttcher</a>
@@ -20,6 +23,12 @@ public class JettyStarter {
      * @throws Exception might throw for several reasons.
      */
     public static void main(String... args) throws Exception {
+    	
+    	/**
+    	 * init datastore
+    	 */
+    	DefaultDataFactory.fillDefault(DataStore.INSTANCE);
+    	
         Server jetty = new Server(PORT);
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
         jetty.start();

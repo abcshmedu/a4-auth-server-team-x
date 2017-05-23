@@ -6,7 +6,7 @@ import edu.hm.cs.swa.projekt_4.datamodel.User;
 /**
  * This interface describes all available methods of our business logic.
  */
-public interface AuthService {
+public interface IAuthService {
 
     public Token authUser(String username, String password);
 

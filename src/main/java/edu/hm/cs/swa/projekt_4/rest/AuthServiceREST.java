@@ -2,7 +2,7 @@ package edu.hm.cs.swa.projekt_4.rest;
 
 import edu.hm.cs.swa.projekt_4.datamodel.Token;
 import edu.hm.cs.swa.projekt_4.datamodel.User;
-import edu.hm.cs.swa.projekt_4.logic.AuthService;
+import edu.hm.cs.swa.projekt_4.logic.IAuthService;
 import edu.hm.cs.swa.projekt_4.logic.AuthServiceImpl;
 import edu.hm.cs.swa.projekt_4.logic.ValidationResult;
 
@@ -29,7 +29,7 @@ public class AuthServiceREST {
                              @QueryParam("password") String password) {
 
         LOGGER.info("rest request: auth User username: " + username + ", password: " + password);
-        AuthService service = new AuthServiceImpl();
+        IAuthService service = new AuthServiceImpl();
 
         Token result = service.authUser(username, password);
         if (result != null)
@@ -43,7 +43,7 @@ public class AuthServiceREST {
     @Produces(MediaType.APPLICATION_JSON + "; charset=utf-8")
     public Response registerUser(User newUser) {
         LOGGER.info("rest request: register User");
-        AuthService service = new AuthServiceImpl();
+        IAuthService service = new AuthServiceImpl();
 
         ValidationResult result = service.registerUser(newUser);
 
