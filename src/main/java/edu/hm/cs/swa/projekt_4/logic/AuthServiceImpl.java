@@ -24,8 +24,9 @@ public class AuthServiceImpl implements IAuthService {
             if (user.getActiveToken(invocationDate) != null)
                 return user.getActiveToken(invocationDate);
             else {
-                user.setLastToken(TokenFactory.INSTANCE.createToken());
-                return user.getActiveToken(invocationDate);
+                Token newToken = TokenFactory.INSTANCE.createToken();
+                user.setLastToken(newToken);
+                return newToken;
             }
         return null;
     }

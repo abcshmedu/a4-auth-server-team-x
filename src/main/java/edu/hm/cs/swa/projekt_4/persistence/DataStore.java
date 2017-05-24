@@ -9,8 +9,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class DataStore implements IDataStore{
-
+public class DataStore implements IDataStore {
 
     public static DataStore INSTANCE = new DataStore();
 
@@ -18,7 +17,7 @@ public class DataStore implements IDataStore{
     private List<Authorization> authorizationList;
     private List<AuthorizationGroup> authorizationGroupList;
 
-    public DataStore() {
+    private DataStore() {
         userList = new ArrayList<>();
         authorizationGroupList = new ArrayList<>();
         authorizationList = new ArrayList<>();
@@ -36,49 +35,49 @@ public class DataStore implements IDataStore{
         return userList.stream().filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password)).findFirst().orElse(null);
     }
 
-	@Override
-	public void addAuthorization(Authorization authorization) {
-		this.authorizationList.add(authorization);
-		
-	}
+    @Override
+    public void addAuthorization(Authorization authorization) {
+        this.authorizationList.add(authorization);
 
-	@Override
-	public List<Authorization> getAllAuthorizations() {
-		return this.authorizationList;
-	}
+    }
 
-	@Override
-	public void addAuthorizationGroup(AuthorizationGroup group) {
-		this.authorizationGroupList.add(group);
-		
-	}
+    @Override
+    public List<Authorization> getAllAuthorizations() {
+        return this.authorizationList;
+    }
 
-	@Override
-	public List<AuthorizationGroup> getAllAuthorizationGroups() {
-		return this.authorizationGroupList;
-	}
+    @Override
+    public void addAuthorizationGroup(AuthorizationGroup group) {
+        this.authorizationGroupList.add(group);
 
-	@Override
-	public User getUserForToken(String tokenID) {
-		
-		
-		User foundUser = null;
-		Iterator<User> it =  userList.iterator();
-		
-		while(foundUser == null && it.hasNext()){
-			
-			User tempUser =  it.next();
-			
-			if(tempUser.getLastToken().getID().equals(tokenID) &&
-			   tempUser.getActiveToken(new Date()) != null){
-					foundUser = tempUser;		
-			}
-			
+    }
 
-		}
-		
-		return foundUser;
-	}
+    @Override
+    public List<AuthorizationGroup> getAllAuthorizationGroups() {
+        return this.authorizationGroupList;
+    }
+
+    @Override
+    public User getUserForToken(String tokenID) {
+
+
+        User foundUser = null;
+        Iterator<User> it = userList.iterator();
+
+        while (foundUser == null && it.hasNext()) {
+
+            User tempUser = it.next();
+
+            if (tempUser.getLastToken() != null && tempUser.getLastToken().getID().equals(tokenID) &&
+                    tempUser.getActiveToken(new Date()) != null) {
+                foundUser = tempUser;
+            }
+
+
+        }
+
+        return foundUser;
+    }
 
 
 }

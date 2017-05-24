@@ -2,8 +2,8 @@ package edu.hm.cs.swa.projekt_4.rest;
 
 import edu.hm.cs.swa.projekt_4.datamodel.Token;
 import edu.hm.cs.swa.projekt_4.datamodel.User;
-import edu.hm.cs.swa.projekt_4.logic.IAuthService;
 import edu.hm.cs.swa.projekt_4.logic.AuthServiceImpl;
+import edu.hm.cs.swa.projekt_4.logic.IAuthService;
 import edu.hm.cs.swa.projekt_4.logic.ValidationResult;
 
 import javax.ws.rs.Consumes;
@@ -34,7 +34,7 @@ public class AuthServiceREST {
         Token result = service.authUser(username, password);
         if (result != null)
             return Response.ok(result).build();
-        return Response.status(Response.Status.BAD_REQUEST).entity(result).build();
+        return Response.status(ValidationResult.AUTHORIZATION_MISSING.getStatus()).entity(ValidationResult.AUTHORIZATION_MISSING).build();
     }
 
     @POST
