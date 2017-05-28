@@ -47,8 +47,6 @@ public class AuthServiceREST {
 
         ValidationResult result = service.registerUser(newUser);
 
-        if (result != null)
-            return Response.ok(result).build();
-        return Response.status(Response.Status.BAD_REQUEST).entity(result).build();
+        return Response.status(result.getStatus()).entity(result).build();
     }
 }

@@ -21,6 +21,12 @@ public class DataStore implements IDataStore {
         userList = new ArrayList<>();
         authorizationGroupList = new ArrayList<>();
         authorizationList = new ArrayList<>();
+
+        DefaultDataFactory.fillDefault(this);
+    }
+
+    public void reset() {
+        INSTANCE = new DataStore();
     }
 
     public List<User> getUsers() {

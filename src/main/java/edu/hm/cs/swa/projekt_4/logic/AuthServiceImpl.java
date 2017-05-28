@@ -33,6 +33,9 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public ValidationResult registerUser(User newUser) {
+        if (newUser == null || newUser.getPassword() == null || newUser.getPassword().isEmpty() || newUser.getUsername() == null || newUser.getUsername().isEmpty())
+            return ValidationResult.CREATE_USER_FAILED;
+        newUser.addAuthGroup(DataStore.INSTANCE.getAllAuthorizationGroups().get(0));
         DataStore.INSTANCE.addUser(newUser);
         return ValidationResult.CREATE_USER;
     }

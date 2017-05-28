@@ -23,11 +23,7 @@ public class JettyStarter {
      * @throws Exception might throw for several reasons.
      */
     public static void main(String... args) throws Exception {
-    	
-    	/**
-    	 * init datastore
-    	 */
-    	DefaultDataFactory.fillDefault(DataStore.INSTANCE);
+
     	
         Server jetty = new Server(PORT);
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));

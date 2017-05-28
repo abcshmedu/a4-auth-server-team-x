@@ -6,7 +6,14 @@ import edu.hm.cs.swa.projekt_4.datamodel.User;
 
 public class DefaultDataFactory {
 
-    private static final String[] authorizations = new String[]{"media.book.create"};
+    private static final String[] authorizations = new String[]{
+            "media.book.create",
+            "media.book.update",
+            "media.book.get",
+            "media.disc.create",
+            "media.disc.update",
+            "media.disc.get"
+    };
 
     public static void fillDefault(IDataStore dataStore) {
 
@@ -15,8 +22,7 @@ public class DefaultDataFactory {
         addAuthorizationGroup(dataStore);
 
         addUser(dataStore);
-
-
+        
     }
 
 
