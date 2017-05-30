@@ -14,7 +14,7 @@ import edu.hm.cs.swa.projekt_4.persistence.DefaultDataFactory;
 public class JettyStarter {
 
     public static final String APP_URL = "/";
-    public static final int PORT = 8082;
+    public static final int PORT = 8000;
     public static final String WEBAPP_DIR = "./src/main/webapp/";
 
     /**
